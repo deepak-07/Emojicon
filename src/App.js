@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import bg from "./christmas.jpg";
+import bg from "/christmas.jpg";
 import "./styles.css";
 
 const santaEmoticon = {
@@ -29,6 +29,9 @@ export default function App() {
     var userInput = event.target.value;
     // console.log(userInput);
     var meaning = santaEmoticon[userInput];
+    if (meaning === undefined) {
+      meaning = "This emoji is not in our db";
+    }
     setMeaning(meaning);
   }
   function emojiOnClickHandler(emoji) {
@@ -42,7 +45,8 @@ export default function App() {
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover ",
-        minHeight: "600px"
+        minHeight: "600px",
+        opacity: "0.9"
       }}
     >
       <div className="App">
@@ -61,7 +65,7 @@ export default function App() {
           {meaning}
         </span>
 
-        <h3 style={{ color: "white" }}>All we have </h3>
+        <h3 style={{ color: "white" }}>All We have </h3>
 
         {emojiWeKnow.map(function (emoji) {
           return (
@@ -69,9 +73,9 @@ export default function App() {
               onClick={() => emojiOnClickHandler(emoji)}
               style={{
                 margin: "auto",
-                display: "inline",
+                display: "inline-block",
                 textAlign: "center",
-                padding: "2rem 2rem",
+                padding: "10px 20px",
                 fontSize: "2rem",
                 cursor: "pointer"
               }}
@@ -81,11 +85,6 @@ export default function App() {
             </span>
           );
         })}
-        {/* <h2
-          style={{ backgroundColor: "red", padding: "0.7rem", color: "grey" }}
-        >
-          Choose emoji to see their meaning
-        </h2> */}
       </div>
     </div>
   );
